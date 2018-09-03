@@ -1,0 +1,20 @@
+.province{
+	fill: gray;
+}
+
+.province:hover{
+	fill: pink; !IMPORTANT
+}
+
+.selected{
+	fill:pink; !IMPORTANT
+}
+
+svg{
+	background-color: lightblue;
+	float: left;
+}
+
+body{
+
+}

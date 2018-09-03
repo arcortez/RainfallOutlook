@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<html ng-app="app" ng-controller="Controller">
+<head>
+<title>Mapper</title>
+</head>
+<body>
+	<script type="text/javascript" src="js/d3.min.js"></script>
+	<script type="text/javascript" src="js/jquery-3.1.1.min.js"></script>
+	<script type="text/javascript" src="js/angular.min.js"></script>
+	<script type="text/javascript" src="phjson.js"></script>
+	<script type="text/javascript" src="mapper.js"></script>	
+	<script type="text/javascript" src="controller.js"></script>
+	<link rel="stylesheet" type="text/css" href="css/custom.css">
+
+	<span id="provincename"></span>
+	<span id="selectedprovince"></span>
+	<div>
+		<table>
+			<tr>
+				<td>Population</td>
+				<td>Area</td>
+				<td>Class</td>
+				<td>Province</td>
+			</tr>
+			<tr ng-repeat="x in data">
+				<td>{{x.Population}}</td>
+				<td>{{x.Area}}</td>
+				<td>{{x.Class}}</td>
+				<td>{{x.Province}}</td>
+			</tr>
+		</table>
+	</div>
+
+	<style type="text/css" id="stylish">
+
+	</style>
+</body>
+</html>
+
