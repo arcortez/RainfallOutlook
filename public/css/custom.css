@@ -1,0 +1,43 @@
+.province{
+	fill: gray;
+}
+
+.province:hover{
+	fill: pink; !IMPORTANT
+}
+
+.selected{
+	fill:pink; !IMPORTANT
+}
+
+svg{
+
+	float: center;
+	background-color: white
+}
+
+body{
+	margin: 2vw 3vw 3vw 2vw;
+}
+
+.title{
+	text-align: center;
+}
+
+#up-1{
+	font-size: 32px;
+	font-family: Helvetica, serif;
+	font-weight: lightest;
+	margin: 5px 0px 20px 0px;
+}
+
+#up-2{
+	font-family: sans-serif;
+}
+
+.container {
+	background-color: aliceblue;
+	width: 95vw;
+	max-width: 95vw;
+
+}
