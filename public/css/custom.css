@@ -10,19 +10,21 @@
 	fill:pink; !IMPORTANT
 }
 
-svg{
-
-	float: center;
-	background-color: white
+#map-1{
+	height: 454; !IMPORTANT
+	width: 282; !IMPORTANT
+	background-color: white;
 }
 
 body{
-	margin: 2vw 3vw 3vw 2vw;
+	margin: 1vw 1vw 1vw 1vw;
 }
 
 .title{
 	text-align: center;
+	margin-bottom: 1.5vw;
 }
+
 
 #up-1{
 	font-size: 32px;
@@ -37,7 +39,33 @@ body{
 
 .container {
 	background-color: aliceblue;
-	width: 95vw;
-	max-width: 95vw;
+	width: 97vw;
+	max-width: 97vw;
 
+}
+
+#allmaps{
+	/*background-color: skyblue;*/
+	width: 98vw;
+	float: left;
+}
+
+.map{
+	background-color: pink;
+	padding: .25vw .25vw .25vw .25vw;
+	/*min-width: 97vw;*/ /*will be appended to current class when size of screen exceeds minimum and d3 can no longer render the philippine map that can be distinguishable by the human eyes*/
+	float: left;
+}
+
+.map-month{
+	background-color: yellow;
+	text-align: center;
+}
+
+.map-holder {
+	background-color: sienna;
+	min-width: 18.7vw;
+	max-width: 18.7vw;
+	min-height: 29.4vw;
+	max-height: 29.4vw;
 }

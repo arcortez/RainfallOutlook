@@ -2,7 +2,7 @@
 <meta charset="utf-8">
 <html ng-app="app" ng-controller="Controller">
 <head>
-<title>Mapper</title>
+<title>Rainfall Outlook</title>
 </head>
 
 <body>
@@ -21,27 +21,65 @@
 	
 	<link rel="stylesheet" type="text/css" href="css/custom.css">
 
-	<!-- <span id="provincename"></span>
-	<span id="selectedprovince"></span>
-	<div>
-		<table>
-			<tr>
-				<td>Population</td>
-				<td>Area</td>
-				<td>Class</td>
-				<td>Province</td>
-			</tr>
-			<tr ng-repeat="x in data">
-				<td>{{x.Population}}</td>
-				<td>{{x.Area}}</td>
-				<td>{{x.Class}}</td>
-				<td>{{x.Province}}</td>
-			</tr>
-		</table>
-	</div> -->
+	<div id="allmaps">
+		<div class="map">
+			<div class="map-month">February</div>
+			<div class="map-holder" >
+				<svg class="svg-map" id="map-1">
+				</svg>
+			</div>
+			<div class="map-dropdown-1">
+
+			</div>
+		</div>
+		<div class="map">
+			<div class="map-month">March</div>
+			<div class="map-holder">
+				<svg class="svg-map" id="map-2">
+
+				</svg>
+			</div>
+			<div class="map-dropdown-2">
+
+			</div>
+		</div>
+		<div class="map">
+			<div class="map-month">April</div>
+			<div class="map-holder">
+				<svg class="svg-map" id="map-3">
+
+				</svg>
+			</div>
+			<div class="map-dropdown-3">
+
+			</div>
+		</div>
+		<div class="map">
+			<div class="map-month">May</div>
+			<div class="map-holder">
+				<svg class="svg-map" id="map-4">
+
+				</svg>
+			</div>
+			<div class="map-dropdown-4">
+
+			</div>
+		</div>
+		<div class="map">
+			<div class="map-month">June</div>
+			<div class="map-holder">
+				<svg class="svg-map" id="map-5">
+
+				</svg>
+			</div>
+			<div class="map-dropdown-5">
+
+			</div>
+		</div>
+	</div>
 
 	<style type="text/css" id="stylish">
-
+		
 	</style>
 </body>
 </html>
