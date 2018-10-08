@@ -17,7 +17,8 @@
 }
 
 body{
-	margin: 1vw 1vw 1vw 1vw;
+	margin: .5pxvw 1vw 1vw 1vw;
+	overflow-x: hidden; 
 }
 
 .title{
@@ -38,7 +39,7 @@ body{
 }
 
 .container {
-	background-color: aliceblue;
+	/*background-color: aliceblue;*/
 	width: 97vw;
 	max-width: 97vw;
 
@@ -46,26 +47,61 @@ body{
 
 #allmaps{
 	/*background-color: skyblue;*/
-	width: 98vw;
+	max-width: 98vw;
+	width:98vw;
+
 	float: left;
+	overflow-x: scroll;
+	overflow-y: hidden;
+	height: 37vw;
+
+}
+
+#innermap{
+	width: 500vw;
 }
 
 .map{
-	background-color: pink;
+	/*background-color: seagreen;*/
 	padding: .25vw .25vw .25vw .25vw;
 	/*min-width: 97vw;*/ /*will be appended to current class when size of screen exceeds minimum and d3 can no longer render the philippine map that can be distinguishable by the human eyes*/
 	float: left;
 }
 
 .map-month{
-	background-color: yellow;
+	/*background-color: yellow;*/
 	text-align: center;
 }
 
 .map-holder {
-	background-color: sienna;
-	min-width: 18.7vw;
-	max-width: 18.7vw;
-	min-height: 29.4vw;
-	max-height: 29.4vw;
+	background-color: pink
+	min-width: 38vw;
+	max-width: 38vw;
+	min-height: 65vh;
+	max-height: 65vh;
+}
+
+.provincenames{
+	display: none;
+}
+
+#municilist{
+	position: absolute;
+	visibility: hidden;
+	background-color: white;
+	opacity: .7;
+	width: 97vw;
+	height: 98vw;
+
+	display: block;
+}
+
+#legend{
+	margin-top: 20px;
+}
+
+#linebreak{
+	background-color: lightgray;
+	width: 80vw;
+	text-align: center;
 }

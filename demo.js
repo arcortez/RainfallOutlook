@@ -18,5 +18,5 @@ app.get('/', function(req, res) {
 
 
 app.listen(3000)
-console.log("Servre running at localhost:3000")
+console.log("Server running at localhost:3000")
 

@@ -1,85 +1,107 @@
 <!DOCTYPE html>
 <meta charset="utf-8">
-<html ng-app="app" ng-controller="Controller">
+<html>
+
 <head>
-<title>Rainfall Outlook</title>
+	<title>Rainfall Outlook</title>
+
+	<meta name="viewport" content="initial-scale=1.0, width=device-width" />    
 </head>
 
 <body>
+
+	<div id="municilist">
+	</div>
+
 	<div class="title">
 		<span id="up-1">Rainfall Outlook for 2018</span><br>
 		<span id="up-2">Know the 5-month rainfall forecast of municipalities with arable and cultivated land based on land cover classification of DA-BAR.</span><br>
 		<span id="up-3">Source: SEAMS; NOAA-Climate Prediction Center</span><br>
 	</div>
 
-	<script type="text/javascript" src="/js/d3.min.js"></script>
-	<script type="text/javascript" src="/js/jquery-3.1.1.min.js"></script>
-	<script type="text/javascript" src="/js/angular.min.js"></script>
-	<script type="text/javascript" src="/js/phjson.js"></script>
-	<script type="text/javascript" src="/js/mapper.js"></script>	
-	<script type="text/javascript" src="/js/controller.js"></script>
 	
 	<link rel="stylesheet" type="text/css" href="css/custom.css">
+	<link rel="stylesheet" type="text/css" href="css/bootstrap.css">
 
 	<div id="allmaps">
+	<div id="innermap">
 		<div class="map">
-			<div class="map-month">February</div>
-			<div class="map-holder" >
-				<svg class="svg-map" id="map-1">
-				</svg>
+			<div class="map-holder" id="map-1">
 			</div>
-			<div class="map-dropdown-1">
-
+				<div class="map-month">February</div><div class="map-dropdown-1">
 			</div>
 		</div>
 		<div class="map">
-			<div class="map-month">March</div>
-			<div class="map-holder">
-				<svg class="svg-map" id="map-2">
-
-				</svg>
+			
+			<div class="map-holder" id="map-2">
 			</div>
 			<div class="map-dropdown-2">
-
+			<div class="map-month">March</div>
 			</div>
 		</div>
 		<div class="map">
-			<div class="map-month">April</div>
+			
 			<div class="map-holder">
-				<svg class="svg-map" id="map-3">
-
-				</svg>
 			</div>
 			<div class="map-dropdown-3">
-
+			<div class="map-month">April</div>
 			</div>
 		</div>
 		<div class="map">
-			<div class="map-month">May</div>
+			
 			<div class="map-holder">
-				<svg class="svg-map" id="map-4">
-
-				</svg>
 			</div>
 			<div class="map-dropdown-4">
-
+			<div class="map-month">May</div>
 			</div>
 		</div>
 		<div class="map">
-			<div class="map-month">June</div>
+			
 			<div class="map-holder">
-				<svg class="svg-map" id="map-5">
-
-				</svg>
 			</div>
 			<div class="map-dropdown-5">
-
+			<div class="map-month">June</div>
+			</div>
+		</div>
+		<div class="map">
+			
+			<div class="map-holder">
+			</div>
+			<div class="map-dropdown-5">
+			<div class="map-month">July</div>
 			</div>
 		</div>
 	</div>
+	</div>
 
-	<style type="text/css" id="stylish">
+	<p class="title"><img src="img/color-legend.png" id="legend"></p>
+
+	<div ng-app="app" ng-controller="Controller">
+		<span>Tabulated Data</span>
+		<div class="title"><span id="linebreak"> <br> </span></div>
+		<a href="#" ng-click="golly()">Provinces</a><span ng-if="true"> > Laguna </span>
+		<div>
+			<table class="table">
+				<tr>
+					<th scope="col">Provinces</th>
+					<th scope="col" ng-repeat="x in months">{{x}}</th>
+				</tr>
+				<tr ng-repeat="y in provincedata">
+					<td>{{y.province}}</td>
+					<td ng-repeat="z in y.array">{{z}}</td>
+				</tr>
+			</table>
+		</div>
 		
-	</style>
+	</div>
+
+
+	
+	<script type="text/javascript" src="/js/d3.min.js"></script>
+	<script type="text/javascript" src="/js/jquery-3.1.1.min.js"></script>
+	<script type="text/javascript" src="js/bootstrap.bundle.min.js"></script>
+	<script type="text/javascript" src="/js/angular.min.js"></script>
+	<script type="text/javascript" src="/js/mapper.js"></script>	
+	<script type="text/javascript" src="/js/controller.js"></script>
 </body>
 </html>

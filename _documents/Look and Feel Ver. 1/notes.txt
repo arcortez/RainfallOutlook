@@ -1,0 +1,2 @@
+Buttons:
+1. Edit Button - Always Visible, but redirects to Log In if user is not logged in.
