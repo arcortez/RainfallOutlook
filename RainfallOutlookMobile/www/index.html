@@ -1,104 +1,295 @@
 <!DOCTYPE>
-<html ng-app="app" ng-controller="Controller">
+
+<html id="fullscale" ng-app="app" ng-controller="Controller">
+
 <head>
+    <meta http-equiv="content-type" content="text/html" charset="UTF-8"/>
     <title>Rainfall Outlook</title>
-    <meta charset="utf-8">
-    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width"/>
 </head>
-<body>
+
+<body onload="onDeviceReady()">
     
     <link rel="stylesheet" type="text/css" href="css/custom.css">
     <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
 
-    <div id="mySidenav" class="sidenav">
-        <a href="#"onclick="closeNav()" id="close-side-nav"><i class="material-icons large-2">close</i></a>
+
+    <div id="scheme" class="page-content">
+        <img src="img/dost-pcaarrd-uplb.png" class="iconics">
+        <img src="img/header_green.png" class="iconics">
+        <br>
         <hr>
-        <ul>
-            <li><a class="navitem" href="#" onclick="openPage('maps')"><i class="material-icons large-2 left">location_on</i><span class="navlabel">Map</span></a></li>
-            <li><a class="navitem" href="#" onclick="openPage('data')"><i class="material-icons large-2 left">view_quilt</i><span class="navlabel">Data</span></a></li>
-            <li><a class="navitem" href="#" onclick="openPage('downloads')"><i class="material-icons large-2 left">vertical_align_bottom</i><span class="navlabel">Downloads</span></a></li>
-            <hr>
-            <li><a class="navitem" href="#" onclick="openPage('settings')"><i class="material-icons large-2 left">settings</i><span class="navlabel">Settings & Updates</span></a></li>
-        </ul>
+        <br>
+        <h5>Choose a Color Scheme</h5>
+        <select id="cschema" class="btn btn-light indent">
+            <option value="BLUE">Shades of Blue</option>
+            <option value="FOUR">Four Colors</option>
+        </select>
+        <button onclick="selectScheme()" class="btn btn-success">select</button>
+        <p class="font12 indent">*(This can be changed later in "Settings & Updates")</p>
+        <p id="notices"></p>
+            
+        <hr>
+        <p>Four Colors (Red, Yellow, Green, Blue)</p>
+        <img src="img/four.png" class="siglegende">
+        <hr>
+        <p>Shades of Blue</p>
+        <img src="img/blue.png" class="siglegende">
     </div>
 
+    <div id="page-header" class="pad-big pad-small">
+        <p class="bottomless">
+            <a href="#" id="menuOpen" class="menutoggler" onclick="openNav()"><i class="material-icons large-2">menu</i></a>
+            <a href="#" id="menuClose" class="menutoggler" onclick="closeNav()"><i class="material-icons large-2">menu</i></a>
+            
+            <img src="img/dost-pcaarrd-uplb.png" class="iconics">
+            <span id="headlogo">
+                <img src="img/header_green.png" class="iconics none-on-small disp-on-big">
+            </span>
+
+        </p>
+    </div>
+
+
+    <div id="mySidenav" class="sidenav">
+        <ul class="bottomless">
+            <li class="center">
+                <img src="img/header_green.png" class="sizing">
+            </li>
+            <hr>
+            <li class="navitem" href="#" onclick="openPage('home'); closeNav()">
+                <i class="material-icons font24 left mtop">home</i>
+                <span class="font20">Home</span>
+            </li>
+            <li class="navitem" href="#" onclick="openPage('data'); closeNav()">
+                <i class="material-icons font24 left mtop">view_quilt</i>
+                <span class="font20">Data Tables</span>
+            </li>
+            <li class="navitem" href="#" onclick="openPage('downloads'); closeNav()">
+                <i class="material-icons font24 left mtop">vertical_align_bottom</i>
+                <span class="font20">Downloads</span>
+            </li>
+            <li class="navitem" href="#" onclick="openPage('settings'); closeNav()">
+                <i class="material-icons font24 left mtop">settings</i>
+                <span class="font20">Settings & Updates</span>
+            </li>
+            <li id="tiptag" class="navitem" href="#" onclick="openTip()"> 
+                <i class="material-icons font24 left mtop">feedback</i>
+                <span class="font20">AGRITIP</span>
+            </li>
+            <span id="agritips" href="#" onclick="closeTip()">
+                <hr>
+                <li class="navitem" href="#" onclick="">
+                    <i class="material-icons font24 left mtop">feedback</i>
+                    <span class="font20">AGRITIP</span>
+                    <i class="material-icons font24 right mtop">close</i>
+                </li>
+                <li class="navitem font14 thickpads" href="#" onclick="">
+                    <p>If rainfall is <strong>more than 100mm</strong>, planting corn is advisable. If rainfall is <strong>more than 200mm</strong>, planting corn and rice is advisable.</p>
+                </li>
+            </span>
+            
+        </ul>
+        <br>
+        <div onclick="closeNav()" class="shutterclose">
+            <p class="bottomless center"><i class="material-icons">keyboard_capslock</i> </p>
+        </div>
+    </div>
+
+
     <div id="main">
-        <div id="maps" class="page-content">
-            <div class="titlebar" id="titlebar-1">
-                <a href="#" id="menutoggler" onclick="openNav()"><i class="material-icons large-1">menu</i></a>
-                <span class="large-1 page-title">Rainfall Outlook</span>
+        <div id="home" class="page-content">
+            <div class="center font20" ng-if="loadingbar">
+                <span class="loading">{{notif}}</span>
+                <div class="loader left"></div>
+                <div class="loader right"></div>
+                <hr>
             </div>
-            <div id="allmaps">
-                <div id="innermap">
-                    <div class="map"> <div class="map-holder"></div> </div>
-                    <div class="map"> <div class="map-holder"></div> </div>
-                    <div class="map"> <div class="map-holder"></div> </div>
-                    <div class="map"> <div class="map-holder"></div> </div>
-                    <div class="map"> <div class="map-holder"></div> </div>
-                    <div class="map"> <div class="map-holder"></div> </div>
+            <h4 class="center">Rainfall Outlook</h4>
+            <p class="font12 center bottomless">
+                <strong>Know the 6-month rainfall forecast of municipalities with arable and cultivated land based on land cover classification of DA-BAR.</strong>
+                <br>
+                Source: SEAMS; NOAA-Climate Prediction Center
+            </p>
+
+            <hr>
+            <div class="center">
+                <form id="displays">
+                    <div class="container">
+                        <p class="font14 center bottomless"><strong>PROVINCE</strong></p>
+                        <select name="provinceSelect" class="btn btn-light">
+                            <option ng-repeat="each in provincedata" value="{{each.id}}">{{each.province}}</option>
+                        </select>
+                        <!-- <a href="#" ng-if="searchP == false" ng-click="searchPtoggle()"><i class="material-icons link">search</i></a>
+                        <div ng-if="searchP">
+                            <a href="#" ng-click="searchPtoggle()"><i class="material-icons link">close</i></a>
+                            <input ng-model="pKey" name="pkey">
+                            results: 
+                            <button class="itemized" ng-repeat="each in provincedata | inListP:pKey" ng-click="searchPtoggle()" onclick="setP()">select {{each.province}}</button>
+                        </div> -->
+                        <br ng-if="searchP == false"><!-- <br ng-if="searchP == false"> -->
+                        
+                        <p class="font14 center bottomless"><strong>MUNICIPALITY</strong></p>
+                        <select name="muniSelect" class="btn btn-light">
+                            <option value="all"> -- All -- </option>
+                            <option ng-repeat="each in municipalData.municipalities" value="{{each.id}}">{{each.Municipality}}</option>
+                        </select>
+                        <!-- <a href="#" ng-if="searchM == false" ng-click="searchMtoggle()"><i class="material-icons link">search</i></a>
+                        <div ng-if="searchM">
+                            <a href="#" ng-click="searchMtoggle()"><i class="material-icons link">close</i></a>
+                            <input ng-model="mKey">
+                        </div> -->      
+                    </div>
+                    
+                </form>
+            </div>
+
+            <div>
+                <!-- <span>{{municipalData.province}}</span> -->
+                <div class="container center">
+                    <div class="displayer" ng-repeat="each in displayarr" style="background-color: {{each.color}}; color: {{each.textcolor}}">
+                        <p class="bottomless display-header"><strong>{{months[each.id]}}</strong></p>
+                        {{each.value}} mm        
+                    </div>
+
+                </div>
+            </div>
+
+
+            <div id="legendarea">
+                Legend:
+                <p>
+                    <img src="img/four.png" class="siglegende" ng-if="currentScheme.id==1">
+                    <img src="img/blue.png" class="siglegende" ng-if="currentScheme.id==0">
+                </p>
+            </div>
+            
+            <div id="maps">
+                <div class="upper-border">
+                    <p class="font20 center bottomless">
+                        Six Month Nationwide Rainfall Outlook 
+                    </p>
+                </div>
+                <div class="map"> <div class="map-holder"></div> </div>
+                <div class="map"> <div class="map-holder"></div> </div>
+                <div class="map"> <div class="map-holder"></div> </div>
+                <div class="map"> <div class="map-holder"></div> </div>
+                <div class="map"> <div class="map-holder"></div> </div>
+                <div class="map"> <div class="map-holder"></div> </div>
+            </div>
+
+        </div>  
+
+        <div id="data" class="page-content">
+            <h4 class="center">Tabulated Data</h4>
+            <hr>
+            <p id="provinceheader" class="font20 bottomless">
+                <span ng-if="showProvince">PROVINCES</span>
+                <span ng-if="showMunicipality"><a href="#" ng-click="loadProvinceData()">PROVINCES</a> > {{municipalData.province}}</span>
+            </p> 
+            <div id="table-local">
+                <table> 
+                    <tr>
+                        <th class="rowstarter"><span ng-if="showProvince">Provinces</span><span ng-if="showMunicipality">Municipalities</span></th>
+                        <th class="tabledata" ng-repeat="each in months">{{each}}</th>
+                    </tr>
+                </table>
+                <div id="yscroller">
+                    <table class="areadata">
+                        <tbody ng-if="showProvince">
+                            <tr ng-repeat="each in provincedata">
+                                <td class="rowstarter"><a href="#" ng-click="changeCurrentProvince(each.id)">{{each.province}}</a></td>
+                                <td class="tabledata" ng-repeat="num in each.array" style="background-color: {{num.color}}; color: {{num.textcolor}};">{{num.value}}</td>
+                            </tr>
+                        </tbody>
+                        <tbody ng-if="showMunicipality">
+                            <tr>
+                                <td class="rowstarter">{{municipalData.province}}</td>
+                                <td class="tabledata" ng-repeat="num in municipalData.array" style="background-color: {{num.color}}; color: {{num.textcolor}};">{{num.value}}</td>
+                            </tr>
+                            <tr ng-repeat="each in municipalData.municipalities">
+                                <td class="rowstarter">{{each.Municipality}}</td>
+                                <td class="tabledata" ng-repeat="element in each.array" style="background-color: {{element.color}}; color: {{element.textcolor}};">{{element.value}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
                 </div>
             </div>
         </div>
-        <div id="data" class="page-content">
-            <div class="titlebar" id="titlebar-2">
-                <a href="#" id="menutoggler" onclick="openNav()"><i class="material-icons large-1">menu</i></a>
-                <span class="large-1">Tabulated Data</span>
-            </div>
-            <p>
-                <span ng-if="showProvince">Provinces</span>
-                <span ng-if="showMunicipality"><a href="#" ng-click="loadProvinceData()">Provinces</a> > {{municipalData.province}}</span></p> 
-            <div class="table-local">
-                <table class="areadata">
-                    <tr>
-                        <th><span ng-if="showProvince">Provinces</span><span ng-if="showMunicipality">Municipalities</span></th>
-                        <th ng-repeat="each in months">{{each}}</th>
-                    </tr>
-                    <tbody ng-if="showProvince">
-                        <tr ng-repeat="each in provincedata">
-                            <td><a href="#" ng-click="changeCurrentProvince(each.id)">{{each.province}}</a></td>
-                            <td ng-repeat="num in each.array" style="background-color: {{num.color}};">{{num.value}}</td>
-                        </tr>
-                    </tbody>
-                    <tbody ng-if="showMunicipality">
-                        <tr>
-                            <td>{{municipalData.province}}</td>
-                            <td ng-repeat="num in municipalData.array">{{num}}</td>
-                        </tr>
-                        <tr ng-repeat="each in municipalData.municipalities">
-                            <td>{{each.Municipality}}</td>
-                            <td ng-repeat="element in each.array" style="background-color: {{element.color}};">{{element.value}}</td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-            <i class="material-icons" id="refresh" ng-click="loadProvinceData()">refresh</i>
-        </div>
         <div id="downloads" class="page-content">
-            <div class="titlebar" id="titlebar-3">
-                <a href="#" id="menutoggler" onclick="openNav()"><i class="material-icons large-1">menu</i></a>
-                <span class="large-1 page-title">Downloads</span>
+            <h4 class="center">Downloads</h4>
+            <hr>
+            <div id="downloadlinks">
+                <h5>Spreadsheet files:</h5>
+                <p class="indent bottomless font16 btn btn-light"><a href="https://cdn.fbsbx.com/v/t59.2708-21/46063236_2109976949066903_4216409243189772288_n.csv/Forecast.csv?_nc_cat=108&_nc_ht=cdn.fbsbx.com&oh=6093bf7bb0253219824ddcc5df1e7df6&oe=5BECB731&dl=1&fbclid=IwAR28euuXzuhKoyqV_Pp65WrkRSbhU2y-C3IBOjQ0TEcS4KRfKlB4ZGW4W7k">Forecast.csv</a></p>
+                <p class="indent bottomless font16 btn btn-light"><a href="https://cdn.fbsbx.com/v/t59.2708-21/45434926_291221531600985_4883347437248315392_n.xlsx/Forecast.xlsx?_nc_cat=102&_nc_ht=cdn.fbsbx.com&oh=0d543d90429c9b7fcbfb8c812d0f62d5&oe=5BECF29D&dl=1&fbclid=IwAR3J3vc2QwSWebae8GlQO_0Xns-B7UvyuevW_gXLqcMMACJu9G4dTpBvBQk">Forecast.xlsx</a></p>
+                <p class="font14 internet"> * requires internet to download up to date files</p>
+                <!-- 
+                    Link temporarily for sarai website. 
+                    Server is localhost:3000 in testing, internet is needed for download but info is in app. 
+                -->
+
+                <!--
+                <p>Image Download:</p>
+                <p ng-repeat="x in months"><button class="btn btn-success">{{x}}</button></p> 
+                -->
             </div>
         </div>
         <div id="settings" class="page-content">
-            <div class="titlebar" id="titlebar-4">
-                <a href="#" id="menutoggler" onclick="openNav()"><i class="material-icons large-1">menu</i></a>
-                <span class="large-1 page-title">Settings & Updates</span>
+            <h4 class="center">Settings & Updates</h4>
+            <hr>
+            <p class="font18">Change Color Scheme</p>
+            <div class="indent">
+                <select id="re_schema" class="btn btn-light">
+                    <option value="BLUE">Shades of Blue</option>
+                    <option value="FOUR">Four Colors</option>
+                </select>
+                <button onclick="changeScheme()" class="btn btn-success">select</button>
             </div>
+            <p class="font14 indent">* map colors may not change until app is restarted.</p>
+            <hr>
+            <span>Allow auto-updates</span> 
+            <span class="right">
+                <label class="switch">
+                  <input type="checkbox" checked>
+                  <span class="slider round"></span>
+                </label>
+            </span>
+            
+            <hr>
         </div>
     </div>
 
-    <a href="#" id="floatingbtn" onclick="showLegend('true')"> <i class="material-icons">help_outline</i> </a>
-    <a href="#" id="backtomaps" onclick="openPage('maps')"><i class="material-icons">pin_drop</i></a>
-    <i class="material-icons large-2" id="arrowright">keyboard_arrow_right</i>
-    <i class="material-icons large-2" id="arrowleft">keyboard_arrow_left</i>
-    <img src="img/legend-shadow.png" id="legend" onclick="showLegend('false')">
-    
 
+
+    <div id="footer">
+        <br>
+        <div class="thickpads">
+            <h4>Connect With Us</h4>
+            <p class="font14">
+                <i class="material-icons mtop">email</i> project.sarai.uplb@gmail.com
+            </p>
+        </div>
+        <div class="thickpads">
+            <h4>About SARAi</h4>
+            <p class="font14">
+                Project SARAi aims to develop a national crop forecasting and monitoring system for first six priority crops: rice, corn, banana, coconut, coffee, cacao. This project is funded by DOST-PCAARRD.
+            </p>
+            <p>
+                <img src="img/dost-pcaarrd-uplb.png" class="big-pic">
+            </p>
+            <p><i class="material-icons mtop">copyright</i> Copyright 2017 - Project SARAi</p>
+        </div>
+    </div>
+
+    <!--must be at the end or else nothing will work-->
     <script type="text/javascript" src="js/jquery-3.1.1.min.js"></script>
     <script type="text/javascript" src="js/d3.min.js"></script>
     <script type="text/javascript" src="js/angular.min.js"></script>
+    <script type="text/javascript" src="js/cordova-1.5.0.js"></script>
     <script type="text/javascript" src="js/index.js"></script>
     <script type="text/javascript" src="js/mapper.js"></script>
     <script type="text/javascript" src="js/controller.js"></script>
+
 </body>
 </html>
